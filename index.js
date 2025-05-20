@@ -123,7 +123,7 @@ function resetTurn() {
 }
 
 function startTimer(difficulty) {
-  timer = difficulty === "easy" ? 30 : difficulty === "medium" ? 60 : 120;
+  timer = difficulty === "easy" ? 60 : difficulty === "medium" ? 90 : 120;
   $("#timer").text(timer);
 
   timerInterval = setInterval(() => {
@@ -177,7 +177,7 @@ $("#powerup").on("click", () => {
   powerupCooldown = true;
   $("#powerup").prop("disabled", true);
 
-  // Step 1: Flip all unmatched cards, mark with temp-flip
+
   $(".card").each(function () {
     const isMatched = $(this).hasClass("matched");
     if (!isMatched) {
@@ -185,19 +185,19 @@ $("#powerup").on("click", () => {
     }
   });
 
-  // Step 2: After 1s, unflip only the unmatched ones (temp-flipped)
+
   setTimeout(() => {
     $(".temp-flip").each(function () {
-      // Only unflip if it's still unmatched
+      
       const isMatched = $(this).hasClass("matched");
       if (!isMatched) {
         $(this).removeClass("flip");
       }
-      $(this).removeClass("temp-flip"); // Always clean up
+      $(this).removeClass("temp-flip"); 
     });
   }, 1000);
 
-  // Step 3: Reset cooldown after 30s if still uses left
+  
   setTimeout(() => {
     powerupCooldown = false;
     if (powerupUses < maxPowerupUses) {
